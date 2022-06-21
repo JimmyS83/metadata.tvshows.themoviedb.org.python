@@ -53,7 +53,9 @@ SHOW_ID_REGEXPS = (
     r'(thetvdb)\.com.+&id=(\d+)',                         # TheTVDB_http_link 
     r'(thetvdb)\.com/.*?series/(\d+)',                    # TheTVDB_http_link
     r'(thetvdb)\.com/.*?"id":(\d+)',                      # TheTVDB_http_link
+    r'<uniqueid.+?type="(tvdb|imdb)".*?>([t\d]+?)</uniqueid>'
     )
+
 
 SUPPORTED_ARTWORK_TYPES = {'poster', 'banner'}
 IMAGE_SIZES = ('large', 'original', 'medium')
@@ -365,7 +367,7 @@ def parse_media_id(title):
         return {'type': 'imdb_id', 'title': title} # IMDB ID works alone because it is clear
     elif title.startswith('imdb/tt') and title[7:].isdigit(): # IMDB ID with prefix to match
         return {'type': 'imdb_id', 'title': title[5:]} # IMDB ID works alone because it is clear
-    elif title.startswith('tmdb/') and title[5:].isdigit(): # TVDB ID
+    elif title.startswith('tmdb/') and title[5:].isdigit(): # TMDB ID
         return {'type': 'tmdb_id', 'title': title[5:]}
     elif title.startswith('tvdb/') and title[5:].isdigit(): # TVDB ID
         return {'type': 'tvdb_id', 'title': title[5:]}
